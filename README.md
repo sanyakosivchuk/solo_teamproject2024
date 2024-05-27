@@ -1,2 +1,1 @@
-# collegepractice2024
-this is repo for my college practice
+ensure that u have sqlite3 and tailwind-css installed
