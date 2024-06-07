@@ -1,0 +1,5 @@
+<div class="container mx-auto px-4">
+  <h1 class="text-3xl font-bold mb-4"><%= action_name == 'new' ? 'New Blog' : 'Edit Blog' %></h1>
+  <%= render 'form', blog: @blog %>
+  <%= link_to 'Back', blogs_path, class: "mt-4 inline-block bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded" %>
+</div>

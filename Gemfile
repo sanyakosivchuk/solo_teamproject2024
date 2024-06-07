@@ -10,6 +10,10 @@ gem "sprockets-rails"
 
 # Use sqlite3 as the database for Active Record
 gem "sqlite3"
+gem "devise"
+gem "searchkick"
+gem "elasticsearch", "~> 7.0"
+gem "faker"
 
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", ">= 5.0"
