@@ -1,5 +1,25 @@
-<div class="container mx-auto px-4">
-  <h1 class="text-3xl font-bold mb-4"><%= action_name == 'new' ? 'New Blog' : 'Edit Blog' %></h1>
-  <%= render 'form', blog: @blog %>
-  <%= link_to 'Back', blogs_path, class: "mt-4 inline-block bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded" %>
-</div>
+<%= form_with model: @blog, local: true do |form| %>
+  <div class="mb-4">
+    <%= form.label :title, class: "block text-gray-700 font-bold mb-2" %>
+    <%= form.text_field :title, class: "border rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring focus:border-blue-300" %>
+  </div>
+
+  <div class="mb-4">
+    <%= form.label :content, class: "block text-gray-700 font-bold mb-2" %>
+    <%= form.text_area :content, class: "border rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring focus:border-blue-300" %>
+  </div>
+
+  <div class="mb-4">
+    <%= form.label :photo, class: "block text-gray-700 font-bold mb-2" %>
+    <%= form.file_field :photo, class: "border rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring focus:border-blue-300" %>
+    <% if @blog.photo.attached? %>
+      <div class="mt-2">
+        <%= image_tag @blog.photo, class: 'w-full h-auto' %>
+      </div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.submit 'Save', class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>
+  </div>
+<% end %>

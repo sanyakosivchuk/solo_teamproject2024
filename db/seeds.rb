@@ -4,14 +4,14 @@ user = User.create!(
   email: 'admin@admin.com',
   password: 'password',
   password_confirmation: 'password',
-  role: 'admin'
+  role: :admin
 )
 
 user = User.create!(
   email: 'user@user.com',
   password: 'password',
   password_confirmation: 'password',
-  role: 'default'
+  role: :default
 )
 
 10.times do
