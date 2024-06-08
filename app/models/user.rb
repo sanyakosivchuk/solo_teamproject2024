@@ -5,7 +5,7 @@ class User < ApplicationRecord
   has_many :blogs
   has_many :posts
 
-  enum role: { default: 0, admin: 1 }
+  enum role: { default: 'default', admin: 'admin' }
 
   after_initialize :set_default_role, if: :new_record?
 
