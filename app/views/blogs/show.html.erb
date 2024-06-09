@@ -10,10 +10,10 @@
     <p class="text-sm text-gray-500">Posted by: <%= @blog.user.email %></p>
     
     <h3 class="text-xl font-bold mt-6 mb-2">New Post</h3>
-    <%= form_with model: [@blog, @post], local: true do |form| %>
+    <%= form_with model: [@blog, @blog.posts.build], local: true do |form| %>
       <div class="mb-4">
         <%= form.label :content, class: "block text-gray-700 font-bold mb-2" %>
-        <%= form.text_area :content, placeholder: "Atleast 15 symbols", class: "border rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring focus:border-blue-300" %>
+        <%= form.text_area :content, placeholder: "At least 15 symbols", class: "border rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring focus:border-blue-300" %>
       </div>
       <div>
         <%= form.submit 'Create Post', class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>
@@ -33,21 +33,23 @@
     <% end %>
 
     <h2 class="text-2xl font-bold mt-6 mb-2">Posts</h2>
-    <% @posts.each do |post| %>
-      <div class="bg-gray-100 shadow-sm rounded-lg p-4 mb-4">
-        <p class="text-gray-700"><%= post.content %></p>
-        <% if post.user %>
-          <p class="text-sm text-gray-500">Posted by: <%= post.user.email %></p>
-        <% else %>
-          <p class="text-sm text-gray-500">Posted by: Unknown</p>
-        <% end %>
-        <% if post.persisted? && (post.user == current_user || current_user.admin?) %>
-          <div class="flex mt-2">
-            <%= link_to 'Edit', edit_blog_post_path(@blog, post), class: "mr-2 bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-1 px-3 rounded" %>
-            <%= button_to 'Delete', [@blog, post], method: :delete, data: { confirm: 'Are you sure?' }, class: "bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-3 rounded" %>
-          </div>
-        <% end %>
-      </div>
+    <% @blog.posts.each do |post| %>
+      <% if post.persisted? %>
+        <div class="bg-gray-100 shadow-sm rounded-lg p-4 mb-4">
+          <p class="text-gray-700"><%= post.content %></p>
+          <% if post.user %>
+            <p class="text-sm text-gray-500">Posted by: <%= post.user.email %></p>
+          <% else %>
+            <p class="text-sm text-gray-500">Posted by: Unknown</p>
+          <% end %>
+          <% if post.user == current_user || current_user.admin? %>
+            <div class="flex mt-2">
+              <%= link_to 'Edit', edit_blog_post_path(@blog, post), class: "mr-2 bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-1 px-3 rounded" %>
+              <%= button_to 'Delete', [@blog, post], method: :delete, data: { confirm: 'Are you sure?' }, class: "bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-3 rounded" %>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
     <% end %>
   </div>
 </div>
