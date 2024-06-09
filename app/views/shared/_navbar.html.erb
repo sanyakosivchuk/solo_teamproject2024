@@ -1,7 +1,7 @@
-<nav class="bg-black p-4">
+<nav class="bg-slate-800 p-4">
   <div class="container mx-auto flex justify-between items-center">
-    <div>
-      <%= link_to 'Blogs', blogs_path, class: "text-white font-bold text-lg" %>
+    <div class="flex items-center">
+      <%= link_to image_tag('logo.png', alt: 'Logo', class: 'h-12 w-auto mr-2'), blogs_path%>
     </div>
     <div class="flex items-center">
       <% if user_signed_in? %>
