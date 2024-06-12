@@ -5,7 +5,10 @@ class BlogsController < ApplicationController
 
   def index
     if params[:query].present?
-      @blogs = Blog.search(params[:query], fields: [:title, :user_email], match: :word_start)
+      @blogs = Blog.search(params[:query], fields: [:title, :user_email, :category_name], match: :word_start)
+    elsif params[:category_id].present?
+      @category = Category.find(params[:category_id])
+      @blogs = @category.blogs
     else
       @blogs = Blog.all
     end
@@ -18,6 +21,7 @@ class BlogsController < ApplicationController
 
   def new
     @blog = current_user.blogs.build
+    @categories = Category.all
   end
 
   def create
@@ -25,17 +29,20 @@ class BlogsController < ApplicationController
     if @blog.save
       redirect_to @blog, notice: 'Blog was successfully created.'
     else
+      @categories = Category.all
       render :new
     end
   end
 
   def edit
+    @categories = Category.all
   end
 
   def update
     if @blog.update(blog_params)
       redirect_to @blog, notice: 'Blog was successfully updated.'
     else
+      @categories = Category.all
       render :edit
     end
   end
@@ -52,7 +59,7 @@ class BlogsController < ApplicationController
   end
 
   def blog_params
-    params.require(:blog).permit(:title, :content, :photo)
+    params.require(:blog).permit(:title, :content, :photo, :category_id)
   end
 
   def authorize_user!
