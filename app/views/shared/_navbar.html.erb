@@ -1,11 +1,16 @@
 <nav class="bg-slate-800 p-4">
   <div class="container mx-auto flex justify-between items-center">
     <div class="flex items-center">
-      <%= link_to image_tag('logo.png', alt: 'Logo', class: 'h-12 w-auto mr-2'), blogs_path%>
+      <%= link_to image_tag('logo.png', alt: 'Logo', class: 'h-12 w-auto mr-2'), blogs_path %>
     </div>
     <div class="flex items-center">
       <% if user_signed_in? %>
-        <span class="text-white mr-4"><%= current_user.email %></span>
+        <% if current_user.avatar.attached? %>
+          <%= link_to edit_user_path do %>
+            <%= image_tag current_user.avatar, class: "h-10 w-10 rounded-full mr-2" %>
+          <% end %>
+        <% end %>
+        <%= link_to current_user.email, edit_user_path, class: "text-white mr-4" %>
         <%= button_to "Sign out", destroy_user_session_path, method: :delete, class: "bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" %>
       <% else %>
         <%= link_to 'Sign In', new_user_session_path, class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>

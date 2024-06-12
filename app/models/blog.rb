@@ -3,11 +3,12 @@ class Blog < ApplicationRecord
   has_many :posts, dependent: :destroy
   has_one_attached :photo
 
-  searchkick
+  searchkick word_start: [:title, :user_email]
   def search_data
     {
       title: title,
       content: content,
+      user_email: user.email,
     }
   end
 end

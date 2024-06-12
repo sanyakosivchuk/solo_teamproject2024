@@ -4,6 +4,7 @@ class User < ApplicationRecord
 
   has_many :blogs
   has_many :posts
+  has_one_attached :avatar
 
   enum role: { default: 'default', admin: 'admin' }
 
