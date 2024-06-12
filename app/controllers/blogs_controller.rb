@@ -5,7 +5,7 @@ class BlogsController < ApplicationController
 
   def index
     if params[:query].present?
-      @blogs = Blog.search(params[:query])
+      @blogs = Blog.search(params[:query], fields: [:title, :user_email], match: :word_start)
     else
       @blogs = Blog.all
     end
