@@ -2,6 +2,7 @@
   <div class="container mx-auto flex justify-between items-center">
     <div class="flex items-center">
       <%= link_to image_tag('logo.png', alt: 'Logo', class: 'h-12 w-auto mr-2'), blogs_path %>
+      <%= link_to 'Categories', categories_path, class: "text-white bg-blue-500 hover:bg-blue-700 font-bold py-2 px-4 rounded ml-4" %>
     </div>
     <div class="flex items-center">
       <% if user_signed_in? %>

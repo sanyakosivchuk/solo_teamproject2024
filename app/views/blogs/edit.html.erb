@@ -19,6 +19,20 @@
     <% end %>
   </div>
 
+  <div class="mb-4">
+    <%= form.label :category_id, "Category", class: "block text-gray-700 font-bold mb-2" %>
+    <%= form.collection_select :category_id, @categories, :id, :name, { prompt: "Select a category" }, class: "border rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring focus:border-blue-300" %>
+  </div>
+
+  <div class="mb-4">
+    <div class="flex items-center">
+      <% if current_user.avatar.attached? %>
+        <%= image_tag current_user.avatar, class: "h-10 w-10 rounded-full mr-2" %>
+      <% end %>
+      <p class="text-sm text-gray-500">Posted by: <%= current_user.email %></p>
+    </div>
+  </div>
+
   <div>
     <%= form.submit 'Save', class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>
   </div>

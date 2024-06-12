@@ -1,0 +1,12 @@
+<h1 class="text-3xl font-bold mb-4">New Category</h1>
+
+<%= form_with model: @category, local: true do |form| %>
+  <div class="mb-4">
+    <%= form.label :name, class: "block text-gray-700 font-bold mb-2" %>
+    <%= form.text_field :name, class: "border rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring focus:border-blue-300" %>
+  </div>
+
+  <div>
+    <%= form.submit 'Create Category', class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>
+  </div>
+<% end %>
