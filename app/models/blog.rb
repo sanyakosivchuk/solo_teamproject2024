@@ -1,5 +1,5 @@
 class Blog < ApplicationRecord
-  belongs_to :category, optional: true
+  belongs_to :category
   belongs_to :user
   has_many :posts, dependent: :destroy
   has_one_attached :photo
@@ -10,7 +10,7 @@ class Blog < ApplicationRecord
     {
       title: title,
       user_email: user.email,
-      category_name: category&.name
+      category_name: category.name
     }
   end
 end
