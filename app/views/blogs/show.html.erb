@@ -53,9 +53,31 @@
           <% if post.user == current_user || current_user.admin? %>
             <div class="flex mt-2">
               <%= link_to 'Edit', edit_blog_post_path(@blog, post), class: "mr-2 bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-1 px-3 rounded" %>
-              <%= button_to 'Delete', [@blog, post], method: :delete, data: { confirm: 'Are you sure?' }, class: "bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-3 rounded" %>
+              <%= button_to 'Delete', blog_post_path(@blog, post), method: :delete, data: { confirm: 'Are you sure?' }, class: "bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-3 rounded" %>
             </div>
           <% end %>
+          <!-- Comments section for each post -->
+          <div class="mt-4">
+            <h4 class="text-lg font-bold mb-2">Comments</h4>
+            <% post.comments.each do |comment| %>
+              <div class="bg-white shadow-sm rounded-lg p-2 mb-2">
+                <p class="text-gray-700"><%= comment.content %></p>
+                <p class="text-sm text-gray-500">Commented by: <%= comment.user.email %></p>
+                <% if comment.user == current_user || current_user.admin? %>
+                  <%= button_to 'Delete', blog_post_comment_path(post.blog, post, comment), method: :delete, data: { confirm: 'Are you sure?' }, class: "bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded" %>
+                <% end %>
+              </div>
+            <% end %>
+            <%= form_with model: [post, post.comments.build], url: blog_post_comments_path(@blog, post), local: true do |form| %>
+              <div class="mb-4">
+                <%= form.label :content, class: "block text-gray-700 font-bold mb-2" %>
+                <%= form.text_area :content, placeholder: "Add a comment", class: "border rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring focus:border-blue-300" %>
+              </div>
+              <div>
+                <%= form.submit 'Add Comment', class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>
+              </div>
+            <% end %>
+          </div>
         </div>
       <% end %>
     <% end %>
