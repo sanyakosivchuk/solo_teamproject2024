@@ -18,10 +18,14 @@
     </div>
     
     <h3 class="text-xl font-bold mt-6 mb-2">New Post</h3>
-    <%= form_with model: [@blog, @blog.posts.build], local: true do |form| %>
+    <%= form_with model: [@blog, @blog.posts.build], local: true, html: { multipart: true } do |form| %>
       <div class="mb-4">
         <%= form.label :content, class: "block text-gray-700 font-bold mb-2" %>
         <%= form.text_area :content, placeholder: "At least 15 symbols", class: "border rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring focus:border-blue-300" %>
+      </div>
+      <div class="mb-4">
+        <%= form.label :photo, class: "block text-gray-700 font-bold mb-2" %>
+        <%= form.file_field :photo, class: "border rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring focus:border-blue-300" %>
       </div>
       <div>
         <%= form.submit 'Create Post', class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>
@@ -45,6 +49,11 @@
       <% if post.persisted? %>
         <div class="bg-gray-100 shadow-sm rounded-lg p-4 mb-4">
           <p class="text-gray-700"><%= post.content %></p>
+          <% if post.photo.attached? %>
+            <div class="mb-4">
+              <%= image_tag post.photo, class: 'w-72 h-72' %>
+            </div>
+          <% end %>
           <% if post.user %>
             <p class="text-sm text-gray-500">Posted by: <%= post.user.email %></p>
           <% else %>
@@ -59,15 +68,7 @@
           <!-- Comments section for each post -->
           <div class="mt-4">
             <h4 class="text-lg font-bold mb-2">Comments</h4>
-            <% post.comments.each do |comment| %>
-              <div class="bg-white shadow-sm rounded-lg p-2 mb-2">
-                <p class="text-gray-700"><%= comment.content %></p>
-                <p class="text-sm text-gray-500">Commented by: <%= comment.user.email %></p>
-                <% if comment.user == current_user || current_user.admin? %>
-                  <%= button_to 'Delete', blog_post_comment_path(post.blog, post, comment), method: :delete, data: { confirm: 'Are you sure?' }, class: "bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded" %>
-                <% end %>
-              </div>
-            <% end %>
+            <!-- Form for adding new comment -->
             <%= form_with model: [post, post.comments.build], url: blog_post_comments_path(@blog, post), local: true do |form| %>
               <div class="mb-4">
                 <%= form.label :content, class: "block text-gray-700 font-bold mb-2" %>
@@ -76,6 +77,18 @@
               <div>
                 <%= form.submit 'Add Comment', class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>
               </div>
+            <% end %>
+            <!-- Display comments -->
+            <% post.comments.each do |comment| %>
+              <% if comment.persisted? %>
+                <div class="bg-white shadow-sm rounded-lg p-2 mb-2">
+                  <p class="text-gray-700"><%= comment.content %></p>
+                  <p class="text-sm text-gray-500">Commented by: <%= comment.user&.email || 'Unknown' %></p>
+                  <% if comment.user == current_user || current_user.admin? %>
+                    <%= button_to 'Delete', blog_post_comment_path(post.blog, post, comment), method: :delete, data: { confirm: 'Are you sure?' }, class: "bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded" %>
+                  <% end %>
+                </div>
+              <% end %>
             <% end %>
           </div>
         </div>
