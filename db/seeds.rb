@@ -37,6 +37,5 @@ end
 end
 
 Blog.reindex
-Post.reindex
 
 puts "Seed data created successfully!"
