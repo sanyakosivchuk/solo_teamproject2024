@@ -2,7 +2,7 @@
   <div class="container mx-auto flex justify-between items-center">
     <div class="flex items-center">
       <%= link_to image_tag('logo.png', alt: 'Logo', class: 'h-12 w-auto mr-2'), blogs_path %>
-      <%= link_to 'Categories', categories_path, class: "text-white bg-blue-500 hover:bg-blue-700 font-bold py-2 px-4 rounded ml-4" %>
+      <%= link_to 'Categories', categories_path, class: "text-white bg-gray-600 hover:bg-gray-500 font-bold py-2 px-4 rounded ml-4" %>
     </div>
     <div class="flex items-center">
       <% if user_signed_in? %>
@@ -12,9 +12,9 @@
           <% end %>
         <% end %>
         <%= link_to current_user.email, edit_user_path, class: "text-white mr-4" %>
-        <%= button_to "Sign out", destroy_user_session_path, method: :delete, class: "bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" %>
+        <%= button_to "Sign out", destroy_user_session_path, method: :delete, class: "bg-transparent hover:bg-gray-500 text-white text-white font-bold py-2 px-4 rounded" %>
       <% else %>
-        <%= link_to 'Sign In', new_user_session_path, class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>
+        <%= link_to 'Log In', new_user_session_path, class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>
         <%= link_to 'Sign Up', new_user_registration_path, class: "ml-2 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" %>
       <% end %>
     </div>

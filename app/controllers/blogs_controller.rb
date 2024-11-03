@@ -4,6 +4,7 @@ class BlogsController < ApplicationController
   before_action :authorize_user!, only: [:edit, :update, :destroy]
 
   def index
+    @newest_blogs = Blog.order(created_at: :desc).limit(10)
     if params[:query].present?
       @blogs = Blog.search(params[:query], fields: [:title, :user_email, :category_name], match: :word_start)
     elsif params[:category_id].present?

@@ -1,22 +1,22 @@
-<h2 class="text-3xl font-bold mb-4">Edit Profile</h2>
+<h2 class="text-3xl font-bold mb-4 text-gray-200">Edit Profile</h2>
 
 <%= form_with model: @user, url: user_path, local: true, method: :patch, multipart: true do |form| %>
   <div class="mb-4">
-    <%= form.label :email, class: "block text-gray-700 font-bold mb-2" %>
-    <%= form.email_field :email, class: "border rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring focus:border-blue-300" %>
+    <%= form.label :email, class: "block text-gray-300 font-bold mb-2" %>
+    <%= form.email_field :email, class: "border border-gray-600 rounded w-full py-2 px-3 bg-gray-800 text-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-400" %>
   </div>
 
   <div class="mb-4">
-    <%= form.label :avatar, class: "block text-gray-700 font-bold mb-2" %>
-    <%= form.file_field :avatar, class: "border rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring focus:border-blue-300" %>
+    <%= form.label :avatar, class: "block text-gray-300 font-bold mb-2" %>
+    <%= form.file_field :avatar, class: "border border-gray-600 rounded w-full py-2 px-3 bg-gray-800 text-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-400" %>
     <% if @user.avatar.attached? %>
       <div class="mt-2">
-        <%= image_tag @user.avatar, class: "w-32 h-32 rounded-full" %>
+        <%= image_tag @user.avatar, class: "w-32 h-32 rounded-full border border-gray-500" %>
       </div>
     <% end %>
   </div>
 
   <div>
-    <%= form.submit 'Update Profile', class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>
+    <%= form.submit 'Update Profile', class: "bg-gray-500 hover:bg-gray-400 text-white font-bold py-2 px-4 rounded" %>
   </div>
 <% end %>

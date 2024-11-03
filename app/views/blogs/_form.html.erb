@@ -1,26 +1,26 @@
 <%= form_with model: @blog, local: true do |form| %>
   <div class="mb-4">
-    <%= form.label :title, class: "block text-gray-700 font-bold mb-2" %>
-    <%= form.text_field :title, class: "border rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring focus:border-blue-300" %>
+    <%= form.label :title, class: "block text-gray-300 font-bold mb-2" %>
+    <%= form.text_field :title, class: "border border-gray-600 rounded w-full py-2 px-3 bg-gray-800 text-gray-200 focus:outline-none focus:ring focus:border-blue-300" %>
   </div>
 
   <div class="mb-4">
-    <%= form.label :content, class: "block text-gray-700 font-bold mb-2" %>
-    <%= form.text_area :content, class: "border rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring focus:border-blue-300" %>
+    <%= form.label :content, class: "block text-gray-300 font-bold mb-2" %>
+    <%= form.text_area :content, class: "border border-gray-600 rounded w-full py-2 px-3 bg-gray-800 text-gray-200 focus:outline-none focus:ring focus:border-blue-300" %>
   </div>
 
   <div class="mb-4">
-    <%= form.label :photo, class: "block text-gray-700 font-bold mb-2" %>
-    <%= form.file_field :photo, class: "border rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring focus:border-blue-300" %>
+    <%= form.label :photo, class: "block text-gray-300 font-bold mb-2" %>
+    <%= form.file_field :photo, class: "border border-gray-600 rounded w-full py-2 px-3 bg-gray-800 text-gray-200 focus:outline-none focus:ring focus:border-blue-300" %>
   </div>
 
   <div class="mb-4">
-    <%= form.label :category_id, "Category", class: "block text-gray-700 font-bold mb-2" %>
-    <%= form.collection_select :category_id, @categories, :id, :name, { prompt: "Select a category" }, class: "border rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring focus:border-blue-300" %>
+    <%= form.label :category_id, "Category", class: "block text-gray-300 font-bold mb-2" %>
+    <%= form.collection_select :category_id, @categories, :id, :name, { prompt: "Select a category" }, class: "border border-gray-600 rounded w-full py-2 px-3 bg-gray-800 text-gray-200 focus:outline-none focus:ring focus:border-blue-300" %>
   </div>
 
   <div class="mb-4">
-    <p class="text-sm text-gray-500">Posted by: <%= current_user.email %></p>
+    <p class="text-sm text-gray-400">Posted by: <%= current_user.email %></p>
   </div>
 
   <div>
